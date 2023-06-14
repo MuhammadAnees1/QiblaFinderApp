@@ -13,7 +13,7 @@
     <string name="signup_btn">Already have an account?Sign in</string>
     <string name="welcome_text">Welcome Back</string>
     <string name="email1">Email</string>
-    <string name="signup_with_google">SignUp With Google</string>
+    <string name="signup_with_google">SignIn With Google</string>
     <string name="signup_with_facebook">SignUp With Facebook</string>
     <string name="are_you_new_user_register">Are You New User?Register</string>
 </resources>

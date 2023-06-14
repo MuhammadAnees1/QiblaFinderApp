@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth:22.0.0'
     implementation 'com.google.firebase:firebase-database:20.2.2'
+    implementation 'com.facebook.android:facebook-android-sdk:11.0.0'
 
 
     testImplementation 'junit:junit:4.13.2'

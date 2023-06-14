@@ -63,8 +63,10 @@ public class RegisterActivity extends AppCompatActivity
                                 userRef.child("password").setValue(password);
 
                                 SendUserToMainActivity();
+
                                 Toast.makeText(RegisterActivity.this, "Account Created Successfully...", Toast.LENGTH_SHORT).show();
-                            } else {
+                            }
+                            else {
                                 String message = task.getException().toString();
                                 Toast.makeText(RegisterActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
                             }
