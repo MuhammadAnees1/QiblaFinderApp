@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/menu_compass"
+        android:icon="@drawable/qibla"
+        android:title="Compass" />
+
+    <item
+        android:id="@+id/menu_calender"
+        android:icon="@drawable/baseline_calendar_month_24"
+        android:title="Calender" />
+
+    <item
+        android:id="@+id/menu_services"
+        android:icon="@drawable/baseline_miscellaneous_services_24"
+        android:title="Services"
+        />
+
+</menu>

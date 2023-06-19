@@ -13,7 +13,13 @@
     <string name="signup_btn">Already have an account?Sign in</string>
     <string name="welcome_text">Welcome Back</string>
     <string name="email1">Email</string>
+
     <string name="signup_with_google">SignIn With Google</string>
     <string name="signup_with_facebook">SignUp With Facebook</string>
     <string name="are_you_new_user_register">Are You New User?Register</string>
+
+    <string name="facebook_app_id">224609907053850</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">6957cea06150b69dc1750d93984f133e</string>
+
 </resources>

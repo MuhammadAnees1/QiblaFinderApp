@@ -13,4 +13,11 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.Color" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+    <!-- Primary brand color. -->
+    <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+
 </resources>

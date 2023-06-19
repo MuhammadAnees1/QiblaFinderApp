@@ -1,13 +1,10 @@
 package com.example.qiblafinderapp;
 
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,9 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
     private EditText UserEmail, UserPassword;
     private ImageView LoginButton;
@@ -41,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button FacebookButton;
     private CallbackManager mCallbackManager;
     DatabaseReference UsersRef;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,36 +44,26 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("User");
-
         InitializeFields();
-
-        NeedNewAccountLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SendUserToRegisterActivity();
-            }
-        });
-
-        LoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AllowUserToLogin();
-            }
-        });
-        FacebookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AllowUserToLoginWithFacebook();
-            }
-        });
+        NeedNewAccountLink.setOnClickListener(view -> SendUserToRegisterActivity());
+        LoginButton.setOnClickListener(view -> AllowUserToLogin());
+        FacebookButton.setOnClickListener(view -> AllowUserToLoginWithFacebook());
     }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        updateUI(currentUser);
+//    }
     private void InitializeFields() {
         LoginButton = findViewById(R.id.LoginButton);
         UserEmail = findViewById(R.id.LoginEmail1);
         UserPassword = findViewById(R.id.LoginPassword1);
         NeedNewAccountLink = findViewById(R.id.SendToRegister);
-        FacebookButton = findViewById(R.id.buttonFacebook);
+        FacebookButton = findViewById(R.id.login_button);
     }
+
     private void AllowUserToLogin() {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
@@ -105,9 +90,9 @@ public class LoginActivity extends AppCompatActivity {
     private void AllowUserToLoginWithFacebook() {
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
-         Button loginButton = findViewById(R.id.buttonFacebook);
+        com.facebook.login.widget.LoginButton loginButton = findViewById(R.id.login_button);
 
-         loginButton.setReadPermissions("email", "public_profile");
+        loginButton.setPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -157,14 +142,22 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            // User is logged in, update the UI accordingly
+            SendUserToMainActivity(); // Assuming this method handles the UI update after successful login
+            Toast.makeText(LoginActivity.this, "Logged in Successfully...", Toast.LENGTH_SHORT).show();
+        } else {
+            // User is logged out or login failed, update the UI accordingly
+            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(LoginActivity.this, CompassActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
     }
-
     private void SendUserToRegisterActivity() {
         Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(registerIntent);
